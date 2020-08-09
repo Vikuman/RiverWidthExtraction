@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <meta charset="UTF-8"> 
+
+	 <style type="text/css">
+	 	
+	 </style>
+<script language="JavaScript">
+	var count=0;
+	var count1 = 1;
+	var position_x;
+	var position_y;
+	var d = document.getElementById("rect");
+	// var image1 = document.getElementById('img01')
+	// var position_x;
+	// var position_y;
+
+function mouseDown(event) {
+
+	if(count1 == 2){
+		d.parentNode.removeChild( d );
+		count1 = 1;
+		return;
+	}
+
+	count1=2;
+	position_x = event.offsetX;
+	position_y = event.offsetY;
+	document.pointform.form1_x.value = position_x;
+	document.pointform.form1_y.value = position_y;
+
+	var imgage = document.getElementById("img01");
+	
+	var d = document.getElementById("rect");
+	d.style.position = "absolute";	
+	d.style.left = position_x+'px';
+	d.style.top = position_y+'px';
+	d.style.opacity = "0.1";
+	imgage.style.opacity="0.";
+
+
+	// if(count1 == 2){
+	// 	d.parentNode.removeChild( d );
+	// }
+	// d.style.width = "100";
+	// d.style.height = "100";
+    // document.getElementById("myP").style.color = "red";
+}
+
+function mouseOver(event) {
+
+		position_x2 = event.offsetX;
+		position_y2 = event.offsetY;
+		document.pointform.form3_x.value = position_x2;
+		document.pointform.form3_y.value = position_y2;
+		if(count==0){
+		var d = document.getElementById("rect");
+		// // d.style.position = "absolut
+		d.style.opacity = "0.1";
+
+		
+		d.style.width = position_x2 - position_x + 'px';
+		d.style.height = position_y2 - position_y + 'px';
+	}
+
+
+		// if(mouseUp(event)){
+		// 	return;
+		// }
+		// d.style.right = event.screenX-position_x2 +'px';
+		// d.style.bottom = event.screenY-position_y2 +'px';
+		// console.log(position_x2);
+}
+function mouseUp(event) {
+	count=1;
+	position_x1 = event.offsetX;
+	position_y1 = event.offsetY;
+	document.pointform.form2_x.value = position_x1;
+	document.pointform.form2_y.value = position_y1;
+	var d = document.getElementById("rect");
+	d.style.width = position_x1 - position_x + 'px';
+	d.style.height = position_y1 - position_y + 'px';
+
+	
+	// document.getElementById('rectangle').x=position_x1;
+	// document.getElementById('rectangle').y=position_y1;
+    // document.getElementById("myP").style.color = "red";
+}
+</script>
+</head>
+<body>
+
+
+<div id="pointer_div" style="cursor:crosshair;position: relative;" onmousemove="mouseOver(event)" onmousedown="mouseDown(event)" ondragstart="return false" onselectstart="return false" onmouseup="mouseUp(event)" >    <!--style = "background-image:url('tower.jpg');width:500px;height:333px;"-->
+
+
+
+<img draggable="false" src="tower.jpg" style="position:relative;visibility:visible;z-index:0;" id="img01">
+
+<!-- <map name="planetmap">
+  <area shape="rect" coords="0,0,82,126" style="display: visible;">
+</map> -->
+<!-- svg width="300" height="400" style="display: block;z-index: 2;">	
+
+  <rect x="20" y = "-100" id="rectangle" width="150" height="150" style="position: absolute;fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9;" />
+  Sorry, your browser does not support inline SVG.  
+</svg> -->
+
+<div id="rect" style="background-color: white ; z-index: 2"></div>
+</div>
+
+
+
+<form name="pointform" method="post">
+
+You pointed on first x = <input type="text" name="form1_x" size="4" /> - y = <input type="text" name="form1_y" size="4" /><br>
+You pointed on second x = <input type="text" name="form2_x" size="4" /> - y = <input type="text" name="form2_y" size="4" /><br>
+You pointed on second x = <input type="text" name="form3_x" size="4" /> - y = <input type="text" name="form3_y" size="4" /><br>
+
+</form> 
+</body>
+</html>

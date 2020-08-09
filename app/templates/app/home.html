@@ -1,0 +1,408 @@
+{% extends "app/layout.html" %}
+
+{% block javascript %}
+<script>
+    $(function () { 
+
+
+
+
+      var newurl = "/download/" + $("#hide").html() + ".txt";
+      console.log(newurl);
+      document.getElementById('download_file').href = newurl;
+      $("#download_link").attr("href",newurl);
+      $("#download_link").attr("download", true);
+      
+      console.log(newurl);
+      console.log($("#download_link").attr("href",newurl));
+      var text="";
+      var possible= "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+      for(var i =0;i<20;i++)
+      {
+        text+= possible.charAt(Math.floor(Math.random()*possible.length));
+
+      }
+
+
+
+
+
+
+      var d = new Date();
+      var n = d.getTime();            //delete
+
+    text = text+n
+
+
+
+
+
+
+
+      console.log(text);
+      $("#id_id_name").val(text);
+
+      var image = new Image();     //get the uploaded image
+      image.src = $('#upload').attr("src");  
+      $("#id_image_to_process").val(image.src);   //assign the hidden value of the homeform with original uploaded image
+      var original_image_width = image.naturalWidth;    //get the Width of he original uploaded image
+      var original_image_height = image.naturalHeight;      //get the height of original uploaded image
+      var preview_image_width = $('#userImg').width();     //get the width of the preview area i.e div element by ID userImg
+      var preview_image_height = $('#userImg').height();     //get the height of the preview area i.e div element by ID userImg
+
+      var x1=0;
+      var y1=0;
+      var x2=0;
+      var y2=0;
+      /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW WHEN USER UPLOADS THE IMAGE */
+      $("#sub-area").on("click", function (e) {
+            $("#image").attr('src', $('#upload').attr('src')); 
+           $("#modalCrop").modal("show"); 
+
+
+      /* SCRIPTS TO HANDLE THE CROPPER BOX */
+      var $image = $("#image");
+      var cropBoxData=null;
+      var canvasData=null;
+      $("#modalCrop").on("shown.bs.modal", function () {      //check if the modal window is open
+        $image.cropper({                  //execute the function cropper on the image with following parameters
+          viewMode: 1,    //select the viewMode
+          aspectRatio: NaN,   //aspect ratio of the cropbox.NaN indicates a free cropbox i.e it can be resized freely
+          minCropBoxWidth: 20,    //minimum width of the cropbox
+          minCropBoxHeight: 20,   //minimum Height of the cropbox
+          minContainerWidth:600,  //minimum width of the container
+          minContainerHeight:600,   //minimum Height of the container
+          ready: function () {      //ready function in cropper.js which initialises the cropbox and the container on the modal window
+            $image.cropper("setCanvasData", canvasData);  //Change the canvas (image wrapper) position and size with new data.
+            $image.cropper("setCropBoxData", cropBoxData);    //Change the crop box position and size with new data.
+          }
+        });
+
+      }).on("hidden.bs.modal", function () {    //when the modal window is closed 
+        cropBoxData = $image.cropper("getCropBoxData"); //Gets the crop box position and size data.
+        canvasData = $image.cropper("getCanvasData"); //Gets the Canvas position and size data
+
+
+        $image.cropper("destroy");    //Destroy the cropper and remove the instance from the image.
+      });
+
+      $(".js-zoom-in").click(function () {
+        $image.cropper("zoom", 0.1);
+      });
+
+      $(".js-zoom-out").click(function () {
+        $image.cropper("zoom", -0.1);
+      });
+
+      /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+      $("#cancel").click(function () {    //when user clicks on Cancel button then the modal closes 
+
+      });
+      $("#crop-and-submit").click(function(){   //when user selects to crop the image to be processed
+        var cropData = $image.cropper("getData"); 
+        var imageData = $('#image').cropper('getCroppedCanvas').toDataURL('image/png');  //get the base64 form  of the cropped image 
+        $('#preview-container').remove();   //remove if any previous preview-container present
+        $("#id_image_to_process").val(imageData);   //fill in the forms hidden field image_to_process with the cropped image
+        text="";
+        for(var i =0;i<20;i++)
+      {
+        text+= possible.charAt(Math.floor(Math.random()*possible.length));
+
+      }
+
+    var d = new Date();
+    var n = d.getTime();            //delete
+    text = text+n
+
+      console.log(text);
+
+
+
+      $("#id_id_name").val(text);
+        $('<div>',{id: "preview-container"}).appendTo('#userImg');    //add a preview container for viewing the preview
+        $("#preview-container" ).add().css( {'background-color':'black','margin': 'auto','border':'5px solid grey', 'border-radius': '5px','padding': '5px','margin-top':'10%'} );  //adding some css
+        $('<img>', {id: "cropped-preview", "class": "preview",width:"auto",height:"auto"}).attr('src', imageData).appendTo('#preview-container'); //add an <img> tag in the container to display the cropped image
+         $("#cropped-preview" ).add().css( {'display':'block','margin-left': 'auto','margin-right':'auto','border':'5px solid #ddd', 'border-radius': '5px','padding': '5px','margin-top':'10%','max-width':'100%','max-height':'100%'} );    //add css to it
+
+        //document.getElementById("cropped_result").appendChild(img);
+
+         
+
+ //      $("#upload").css('height','(original_image_height*500)/(x2-x1)');
+ //     console.log((-x1*preview_image_width));
+ //      console.log((x2-x1));
+ //      $("#upload").css('width','(original_image_width*preview_image_width)/(y2-y1)');
+ //      $("#upload").css('left','(-x1*preview_image_width)/(x2-x1)');
+ //      console.log($('#upload').offset().left);
+ //      console.log($('#userImg').offset().left);
+ //      $("#upload").css('top','(-y1*500)/(y2-y1)');
+ // //       $("#formUpload").submit();    //submit the form
+      });
+     
+        });
+    //   $("#my_file ").change(function () {
+    //     console.log("hello");
+    //     if (this.files && this.files[0]) {
+    //       var file = this.files[0];
+    //       var reader = new FileReader();
+    //       reader.onload = function (e) {        //initialise the modal wndow
+    //         $("#image").attr("src", e.target.result);   //provide the url of the uploaded image into the modal window
+    //         $("#modalCrop").modal("show");      //show the modal window
+    //       }
+    //       reader.readAsDataURL(this.files[0]);    //load the uploaded file into the modal
+    //     }
+    
+
+    //   /* SCRIPTS TO HANDLE THE CROPPER BOX */
+    //   var $image = $("#image");
+    //   var cropBoxData=null;
+    //   var canvasData=null;
+    //   $("#modalCrop").on("shown.bs.modal", function () {      //check if the modal window is open
+    //     $image.cropper({                  //execute the function cropper on the image with following parameters
+    //       viewMode: 1,    //select the viewMode
+    //       aspectRatio: NaN,   //aspect ratio of the cropbox.NaN indicates a free cropbox i.e it can be resized freely
+    //       minCropBoxWidth: 20,    //minimum width of the cropbox
+    //       minCropBoxHeight: 20,   //minimum Height of the cropbox
+    //       minContainerWidth:600,  //minimum width of the container
+    //       minContainerHeight:600,   //minimum Height of the container
+    //       ready: function () {      //ready function in cropper.js which initialises the cropbox and the container on the modal window
+    //         $image.cropper("setCanvasData", canvasData);  //Change the canvas (image wrapper) position and size with new data.
+    //         $image.cropper("setCropBoxData", cropBoxData);    //Change the crop box position and size with new data.
+    //       }
+    //     });
+
+    //   }).on("hidden.bs.modal", function () {    //when the modal window is closed 
+    //     cropBoxData = $image.cropper("getCropBoxData"); //Gets the crop box position and size data.
+    //     canvasData = $image.cropper("getCanvasData"); //Gets the Canvas position and size data
+
+
+    //     $image.cropper("destroy");    //Destroy the cropper and remove the instance from the image.
+    //   });
+
+    //   $(".js-zoom-in").click(function () {
+    //     $image.cropper("zoom", 0.1);
+    //   });
+
+    //   $(".js-zoom-out").click(function () {
+    //     $image.cropper("zoom", -0.1);
+    //   });
+
+    //   /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+    //   $("#cancel").click(function () {    //when user clicks on Cancel Button then submit the image and wait for users response on home.html
+
+    //     $("#formUpload").submit();
+    //   });
+    //   $("#crop-and-submit").click(function(){   //when user selects to get cropped image processed
+    //     console.log("hiiii");
+    //     var cropData = $image.cropper("getData"); //get the CropboxData contains: left,top,size,width,height,degree of rotation,scale1x and scaleY
+    //     $("#id_x").val(cropData["x"]);    //fill in form the x coordinate of the cropbox
+    //     $("#id_y").val(cropData["y"]);    //fill in form the y coordinate of the cropbox
+    //     $("#id_height").val(cropData["height"]);    ////fill in form the height of the cropbox
+    //     $("#id_width").val(cropData["width"]);    //fill in form the width of the cropbox
+    //     console.log(cropData["x"]);
+    //     console.log(cropData["y"]);
+    //     console.log(cropData["width"]);
+    //     console.log(cropData["height"]);
+    //     $("#formUpload").submit();    //submit the form
+    //   });
+
+    // });
+
+
+        });
+  </script>
+  <script>
+    $(function () {
+        //$('#id_image_to_process').css('visibility','hidden');
+        $('.menubutton').removeClass('active');
+        $('#viewHome').addClass('active');   
+        $("#upload").on("click", function (e) {
+                $("#my_file").click();
+              
+        });
+    });
+</script>
+ 
+{% endblock %}
+
+
+
+{% block content %}
+
+
+   
+<style>
+    .userImg{
+        padding:0px 15px 0px 0px;
+    }
+    .userImg img:hover{
+        opacity:.6;        
+        cursor:pointer;
+    }
+
+    .watermark {
+    color:#000000;
+    position: absolute;
+    bottom: 0;
+    right: 15%;
+    opacity: .5;
+    display: none;
+}
+    
+.dummytextbox {
+        padding: 4px 2px 8px 15px;
+        background-color: #eeeeee;
+        border: 1px solid #d5d0d0;
+        border-radius: 5px;
+    }
+
+</style>
+
+ 
+
+
+   {{title}}
+   <div class="row" style="">
+     <form method="post" enctype="multipart/form-data" id="image-form-Upload" onchange="this.submit()" >
+     {% csrf_token %}
+  <!--  {{ form1 }} -->
+     <div class="row">
+         <div class="userImg" style="overflow: hidden;margin: auto;" id ="userImg" >
+                <img typeof="image" id="upload" src="data:image/png;base64,{{image}}" style="width: 100%;height: 100%;" alt="dabba " />
+                 <input type="file" name="riverimage" id="my_file" value="upload another file" style="display: none;" />               
+         </div>
+ 
+    </div><br/>
+     </form> 
+    <div class="container" style="padding:3%; background-color:#f2f2f2; border-radius:10px;">
+      <p id ="hide" style="display: none;">{{beta}}</p>
+ <!--         <div class="row"> {% if token %}
+             <div class="col-sm-2">
+                <input type="button" class="btn btn-warning" id ="compute_width" value="Compute Average Width"/> Enable this button only when an image is uploaded-->
+ <!--            </div> 
+            <div class="col-sm-5" style="padding:5px;float:right;">
+                <div class="col-sm-5">
+                    Average River Width
+                </div>
+                <div class="col-sm-6">
+                    <p class="dummytextbox" style="padding-right:20px;"> <i></i> </p>
+                </div>
+            </div>
+        </div> 
+        {% endif %} -->
+             {% if token %}
+        <div class="row">
+             <div class="col-sm-10">
+                 <p><i>Read parameters for width calculation, if required</i></p>
+             </div>
+               <div class="col-sm-2" style="padding:5px;float:right;">
+               </div>
+              <input type="button" class="btn btn-info" value="CROP THE IMAGE" id ="sub-area"/> <!-- Enable this button only when an image is uploaded-->          
+              <!-- <div class="col-sm-2"> -->
+              <form method="post" enctype="multipart/form-data" id="final-form" >
+              {% csrf_token %}
+              <table>
+              {{ form2.as_table }}  
+               </table>
+               <br/>
+               <p><input type="submit" value="Submit" name="final-submit"></p>
+              </form>
+            <!--  </div> -->
+            <div class="col-sm-5">
+               
+           </div>
+            {% endif %}
+        </div>
+    </div>
+    {% if token == 2 %}
+      <div class="container" style="padding:3%; background-color:#f2f2f2; border-radius:10px;">
+        
+            
+        <div class="row">
+             <div class="col-sm-10">
+                 <p><i>Download here the final result</i></p>
+                 <br>
+                 {% comment %} <input type="text" name="final-average-width" value="{{dabba}}"> {% endcomment %}
+             </div>
+               <div class="col-sm-2" style="padding:5px;float:right;">
+               </div>
+              
+            <!--  </div> -->
+            <div class="col-sm-5">
+               
+           </div>
+       
+        </div>
+          
+        <!-- <a href="/download/5mx9fKq0ivqDZMCZqvEs.txt"> <input type="button" value="download text file" id ="download_link"/></a>  -->
+        <!-- <a id="dodo"> <input type="button" value="download text file" id ="download_link"/></a>  -->
+        <!-- <span id="test" ><a>Link</a></span> -->
+        
+        
+        <a id="download_file" style="display:block;"><input type="button" value="download text file"></a>
+  
+   </div>
+        {% endif %}
+    <!--<div class="row"style="padding:3px;">
+        <div class="col-sm-3">
+               <input type="file" name="fileupl" value="fileupl" id="fileupl"> 
+        <label for="fileupl"> Select a file to upload</label>
+        </div>
+        <div class="col-sm-2">
+        <input class="btn btn-primary" type="submit" value="submit"> 
+            </div>
+      
+    </div> 
+
+     <div class="row">
+        <input class=" btn btn-success" type="submit" value="Process" style="float:right;">
+    </div>-->
+   <!-- <div class="row">
+        <form method="post" enctype="multipart/form-data">
+        {{ form.as_p }}
+       <input type="submit" value="submit"/>
+            <p>
+                {{text}}
+                
+            </p>
+        </form>
+    </div>-->
+    <!-- creating a modal window which will contain the crop window -->
+ <div class="modal fade" id="modalCrop">
+    <div class="modal-dialog" style="width: 70%;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Crop the photo</h4>
+        </div>
+        <div class="modal-body">
+          <img src="" id="image" style="max-width: 100%;" class="col-xs-12">
+        </div>
+        <div class="modal-footer">
+          <div class="btn-group pull-left" role="group">
+            <button type="button" class="btn btn-default js-zoom-in">
+              <span class="glyphicon glyphicon-zoom-in"></span>
+            </button>
+            <button type="button" class="btn btn-default js-zoom-out">
+              <span class="glyphicon glyphicon-zoom-out"></span>
+            </button>
+          </div>
+          <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="button" id ="crop-and-submit" class="btn btn-primary js-crop-and-submit" data-dismiss="modal">Crop and Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a id="download_file" style="display:none;"><input type="button" value="download text file"></a>
+<!-- {% if token == 2 %}
+        <span id="test" style="display:block"><a>Link</a></span>
+        {% endif %} -->
+
+ <!-- The Modal -->
+
+<!--  The modal -->
+
+
+{% endblock %}

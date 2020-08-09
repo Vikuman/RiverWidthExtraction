@@ -1,0 +1,229 @@
+---------- This file contains the details of the river image analysed ----------
+
+
+Threshold value used : 43
+Scale value used : 30.0
+Interval distance selected : 100.0
+Length of permissible dangling segments : 100.0
+Number of junctions : 1
+Number of reaches : 3
+Average width of the river : 75.02966451344751
+
+
+Data about the sections ----------------------------------------
+
+Section 1 -------------------------
+     Starting Distance : 0.0
+     Number of channels : 0
+     Average width : 0.0
+
+Section 2 -------------------------
+     Starting Distance : 100.0
+     Number of channels : 0
+     Average width : 0.0
+
+Section 3 -------------------------
+     Starting Distance : 200.0
+     Number of channels : 24
+     Average width : 0.0
+
+Section 4 -------------------------
+     Starting Distance : 300.0
+     Number of channels : 14
+     Average width : 0.0
+
+Section 5 -------------------------
+     Starting Distance : 400.0
+     Number of channels : 1
+     Average width : 90.0389691313216
+
+Section 6 -------------------------
+     Starting Distance : 500.0
+     Number of channels : 1
+     Average width : 94.47170528427769
+
+Section 7 -------------------------
+     Starting Distance : 600.0
+     Number of channels : 1
+     Average width : 100.3952967567417
+
+Section 8 -------------------------
+     Starting Distance : 700.0
+     Number of channels : 1
+     Average width : 67.0820393249937
+
+Section 9 -------------------------
+     Starting Distance : 800.0
+     Number of channels : 1
+     Average width : 80.77687230463569
+
+Section 10 -------------------------
+     Starting Distance : 900.0
+     Number of channels : 1
+     Average width : 67.0820393249937
+
+Section 11 -------------------------
+     Starting Distance : 1000.0
+     Number of channels : 1
+     Average width : 80.77687230463569
+
+Section 12 -------------------------
+     Starting Distance : 1100.0
+     Number of channels : 1
+     Average width : 80.77687230463569
+
+Section 13 -------------------------
+     Starting Distance : 1200.0
+     Number of channels : 1
+     Average width : 67.0820393249937
+
+Section 14 -------------------------
+     Starting Distance : 1300.0
+     Number of channels : 1
+     Average width : 80.77687230463569
+
+Section 15 -------------------------
+     Starting Distance : 1400.0
+     Number of channels : 1
+     Average width : 67.0820393249937
+
+Section 16 -------------------------
+     Starting Distance : 1500.0
+     Number of channels : 1
+     Average width : 80.77687230463569
+
+Section 17 -------------------------
+     Starting Distance : 1600.0
+     Number of channels : 1
+     Average width : 80.77687230463569
+
+Section 18 -------------------------
+     Starting Distance : 1700.0
+     Number of channels : 1
+     Average width : 67.0820393249937
+
+Section 19 -------------------------
+     Starting Distance : 1800.0
+     Number of channels : 1
+     Average width : 80.77687230463569
+
+Section 20 -------------------------
+     Starting Distance : 1900.0
+     Number of channels : 1
+     Average width : 78.41619252963778
+
+Section 21 -------------------------
+     Starting Distance : 2000.0
+     Number of channels : 1
+     Average width : 94.47170528427769
+
+Section 22 -------------------------
+     Starting Distance : 2100.0
+     Number of channels : 1
+     Average width : 92.62405524956368
+
+Section 23 -------------------------
+     Starting Distance : 2200.0
+     Number of channels : 1
+     Average width : 94.47170528427769
+
+Section 24 -------------------------
+     Starting Distance : 2300.0
+     Number of channels : 1
+     Average width : 84.8528137423857
+
+Section 25 -------------------------
+     Starting Distance : 2400.0
+     Number of channels : 1
+     Average width : 84.8528137423857
+
+Section 26 -------------------------
+     Starting Distance : 2500.0
+     Number of channels : 1
+     Average width : 92.62405524956368
+
+Section 27 -------------------------
+     Starting Distance : 2600.0
+     Number of channels : 1
+     Average width : 80.77687230463569
+
+Section 28 -------------------------
+     Starting Distance : 2700.0
+     Number of channels : 1
+     Average width : 96.50967600315269
+
+Section 29 -------------------------
+     Starting Distance : 2800.0
+     Number of channels : 1
+     Average width : 84.8528137423857
+
+Section 30 -------------------------
+     Starting Distance : 2900.0
+     Number of channels : 1
+     Average width : 84.8528137423857
+
+Section 31 -------------------------
+     Starting Distance : 3000.0
+     Number of channels : 1
+     Average width : 96.50967600315269
+
+Section 32 -------------------------
+     Starting Distance : 3100.0
+     Number of channels : 1
+     Average width : 75.96742653368969
+
+Section 33 -------------------------
+     Starting Distance : 3200.0
+     Number of channels : 2
+     Average width : 84.92359245608671
+
+Section 34 -------------------------
+     Starting Distance : 3300.0
+     Number of channels : 1
+     Average width : 90.0
+
+Section 35 -------------------------
+     Starting Distance : 3400.0
+     Number of channels : 1
+     Average width : 76.34413615167959
+
+Section 36 -------------------------
+     Starting Distance : 3500.0
+     Number of channels : 1
+     Average width : 76.34413615167959
+
+Section 37 -------------------------
+     Starting Distance : 3600.0
+     Number of channels : 1
+     Average width : 99.30106595800748
+
+Section 38 -------------------------
+     Starting Distance : 3700.0
+     Number of channels : 1
+     Average width : 95.21451263285829
+
+Section 39 -------------------------
+     Starting Distance : 3800.0
+     Number of channels : 1
+     Average width : 90.0389691313216
+
+Section 40 -------------------------
+     Starting Distance : 3900.0
+     Number of channels : 1
+     Average width : 76.34413615167959
+
+Section 41 -------------------------
+     Starting Distance : 4000.0
+     Number of channels : 1
+     Average width : 62.3606797749979
+
+Section 42 -------------------------
+     Starting Distance : 4100.0
+     Number of channels : 1
+     Average width : 94.86832980505139
+
+Section 43 -------------------------
+     Starting Distance : 4200.0
+     Number of channels : 1
+     Average width : 0.0
+
